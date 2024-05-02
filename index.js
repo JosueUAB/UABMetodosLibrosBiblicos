@@ -162,3 +162,12 @@ if (TextoEncontrado.length > 0) {
     }
 });
 
+// * endpoints 11 Ordenar libros por nombre
+
+app.get('/libros/ordenar/nombre', (req, res) => {
+
+    const ordenarLibros = librosBiblicos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+    res.json(ordenarLibros);
+    
+});
