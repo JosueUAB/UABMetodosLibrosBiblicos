@@ -151,10 +151,14 @@ app.get('/libros/contados/total',(req, res) => {
 //endpoint 6 
 app.get('/libros/texto/:text', (req, res) => {
     const buscar =  req.params.text;
-const TextoEncontrado = librosBiblicos.filter( x => x.nombre === buscar || x.autor ===buscar );
-    if (TextoEncontrado.length > 0) {
+//const TextoEncontrado = librosBiblicos.filter( x => x.nombre === buscar || x.autor ===buscar );
+const TextoEncontrado = librosBiblicos.filter(libro => {
+    return libro.nombre.includes(buscar) || libro.autor.includes(buscar);
+});
+if (TextoEncontrado.length > 0) {
         res.json(TextoEncontrado);
     } else {
         res.status(404).json({mensaje : 'no se han encontrado libros publicados por ese autor'});
     }
 });
+
